@@ -9,34 +9,31 @@
 <body>
 <div id="app"></div>
 <script type="text/jsx">
-    let MessageBox = React.createClass({
+    let ClickApp = React.createClass({
         getInitialState: function () {
             return {
-                isVisible: true,
-                titleMessage: 'Hello world(from state)'
+                clickCount: 0
             }
         },
+        handleClick: function () {
+            this.setState({
+                clickCount: this.state.clickCount + 1
+            })
+        },
         render: function () {
-            let styleObj = {
-                display: this.state.isVisible ? 'block' : 'none'
-            };
             return (
                 <div>
-                    <h1 style={styleObj}>{this.state.titleMessage}</h1>
-                    <Submessage/>
+                    <h2>点击下面按钮</h2>
+                    <button onClick={this.handleClick}>点击我</button>
+                    <p>你一共点击了：{this.state.clickCount}</p>
                 </div>
             )
         }
     });
-
-    var Submessage = React.createClass({
-        render: function () {
-            return (
-                <h3>写代码很有意思</h3>
-            )
-        }
-    });
-    let messageBox = ReactDOM.render(<MessageBox/>, document.getElementById("app"));
+    let clickComponent = ReactDOM.render(
+        <ClickApp/>,
+        document.getElementById('app')
+    );
 </script>
 </body>
 </html>
